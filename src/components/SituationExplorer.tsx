@@ -33,19 +33,22 @@ import heroJusticeShieldImg from '../assets/images/hero_justice_shield_178681712
 import trafficRightsImg from '../assets/images/traffic_rights_card_1786817142250.jpg';
 import womenRightsImg from '../assets/images/women_rights_card_1786817160019.jpg';
 import firComplaintImg from '../assets/images/fir_complaint_card_1786817175521.jpg';
+import { Hero } from './ui/animated-hero';
 
 interface SituationExplorerProps {
   language: 'english' | 'hindi' | 'hinglish';
   onDraftComplaintForSituation: (situationTitle: string) => void;
   selectedSituationId?: string | null;
   onOpenEmergencyShare?: (situationTitle?: string) => void;
+  onOpenSOS?: () => void;
 }
 
 export const SituationExplorer: React.FC<SituationExplorerProps> = ({
   language,
   onDraftComplaintForSituation,
   selectedSituationId,
-  onOpenEmergencyShare
+  onOpenEmergencyShare,
+  onOpenSOS
 }) => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -143,90 +146,124 @@ export const SituationExplorer: React.FC<SituationExplorerProps> = ({
   return (
     <div className="space-y-6">
       
-      {/* Hero Banner with Clear Core Model & Visual Justice Shield */}
-      <div className="bg-[#25282b] text-white rounded-[12px] p-6 sm:p-8 shadow-xl overflow-hidden relative border border-black">
-        {/* Ambient background glow */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#e60000]/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+      {/* Animated Interactive Hero Component */}
+      <Hero 
+        onOpenSOS={onOpenSOS}
+        onExploreRights={() => {
+          const el = document.getElementById('search-and-filter-bar');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }}
+      />
+
+      {/* Hero Section: Modern Block Grid Architecture */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
+        {/* Block 1: Main Announcement & Core Law Model (8 cols on desktop) */}
+        <div className="md:col-span-12 lg:col-span-8 bg-[#25282b] bg-grid-lines-dark text-white rounded-[12px] p-6 sm:p-7 shadow-lg relative overflow-hidden border border-black flex flex-col justify-between">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#e60000]/15 rounded-full blur-3xl pointer-events-none -mr-16 -mt-16" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#25282b] via-transparent to-[#25282b]/80 pointer-events-none" />
           
-          {/* Left Column: Text & Guidance */}
-          <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-[#e60000] animate-pulse" />
-              <span>Core Model: Situation → Your Rights → What To Do → Where To Complain</span>
+          <div className="relative z-10 space-y-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white text-[11px] font-bold uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-[#e60000] animate-pulse" />
+                BNSS 2023 & BNS 2023 Grounded
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full bg-[#e60000]/30 text-rose-200 text-[10px] font-bold uppercase border border-[#e60000]/40">
+                Citizen Legal Shield
+              </span>
             </div>
 
-            <h1 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-white leading-tight">
-              SAKSHAM Portal — Police Rights in India
-            </h1>
+            <div>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight text-white leading-tight">
+                Know Your Police Rights in India
+              </h1>
+              <p className="text-white/80 text-xs sm:text-sm leading-relaxed mt-2 font-light max-w-2xl">
+                Immediate, verified statutory rights and 30-second spoken scripts under the Constitution of India, Bharatiya Nagarik Suraksha Sanhita (BNSS), and landmark Supreme Court mandates.
+              </p>
+            </div>
+          </div>
 
-            <p className="text-white/85 text-xs sm:text-sm leading-relaxed font-light">
-              Every citizen in India is protected by the Constitution of India, the new <strong className="text-white font-bold">Bharatiya Nagarik Suraksha Sanhita (BNSS 2023)</strong>, <strong className="text-white font-bold">Bharatiya Nyaya Sanhita (BNS 2023)</strong>, and landmark Supreme Court mandates. Select any situation below for instant 30-second legal guidance.
+          {/* 4-Step Core Flow Block Row */}
+          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-5 mt-4 border-t border-white/10">
+            <div className="p-2.5 rounded-[8px] bg-white/10 border border-white/10 text-center">
+              <div className="text-[#e60000] font-black text-xs uppercase tracking-wide">1. Situation</div>
+              <div className="text-white/70 text-[10px] font-medium mt-0.5">Identify Incident</div>
+            </div>
+            <div className="p-2.5 rounded-[8px] bg-white/10 border border-white/10 text-center">
+              <div className="text-white font-black text-xs uppercase tracking-wide">2. Your Rights</div>
+              <div className="text-white/70 text-[10px] font-medium mt-0.5">Statutory Rules</div>
+            </div>
+            <div className="p-2.5 rounded-[8px] bg-white/10 border border-white/10 text-center">
+              <div className="text-white font-black text-xs uppercase tracking-wide">3. What To Do</div>
+              <div className="text-white/70 text-[10px] font-medium mt-0.5">Exact Dialogue</div>
+            </div>
+            <div className="p-2.5 rounded-[8px] bg-white/10 border border-white/10 text-center">
+              <div className="text-white font-black text-xs uppercase tracking-wide">4. Complain</div>
+              <div className="text-white/70 text-[10px] font-medium mt-0.5">SP, SPCA, NHRC</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Block 2: Visual Constitutional Shield & Key Articles (4 cols on desktop) */}
+        <div className="md:col-span-12 lg:col-span-4 bg-[#25282b] text-white rounded-[12px] overflow-hidden border border-black shadow-lg flex flex-col justify-between relative group">
+          <div className="relative h-44 sm:h-48 lg:h-52 w-full overflow-hidden">
+            <img
+              src={heroJusticeShieldImg}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = '/images/hero_justice_shield_1786817120335.jpg';
+              }}
+              alt="Constitutional Legal Rights Shield India"
+              className="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
+              loading="eager"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#25282b] via-[#25282b]/30 to-transparent" />
+            <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-amber-400 text-[10px] font-extrabold flex items-center gap-1.5 border border-amber-400/30">
+              <Shield className="w-3.5 h-3.5" />
+              <span>Supreme Court Mandates</span>
+            </div>
+          </div>
+
+          <div className="p-4 space-y-2 relative z-10 -mt-3 bg-[#25282b]">
+            <div className="text-xs font-bold text-white flex items-center justify-between">
+              <span>Articles 20, 21 & 22</span>
+              <span className="text-[10px] font-semibold text-white/60">Constitution of India</span>
+            </div>
+            <p className="text-[11px] text-white/75 leading-relaxed font-light">
+              Fundamental guarantee against illegal detention, custodial torture, and arbitrary arrest without magistrate sanction.
             </p>
-
-            {/* Quick Flow Indicator */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-xs">
-              <div className="p-2.5 rounded-[8px] bg-white/10 border border-white/10 text-center backdrop-blur-sm">
-                <div className="text-[#e60000] font-extrabold text-xs sm:text-sm uppercase">1. Situation</div>
-                <div className="text-white/70 text-[10px] font-normal">Identify incident</div>
-              </div>
-              <div className="p-2.5 rounded-[8px] bg-white/10 border border-white/10 text-center backdrop-blur-sm">
-                <div className="text-white font-extrabold text-xs sm:text-sm uppercase">2. Rights</div>
-                <div className="text-white/70 text-[10px] font-normal">BNSS & Art 21/22</div>
-              </div>
-              <div className="p-2.5 rounded-[8px] bg-white/10 border border-white/10 text-center backdrop-blur-sm">
-                <div className="text-white font-extrabold text-xs sm:text-sm uppercase">3. What To Do</div>
-                <div className="text-white/70 text-[10px] font-normal">Scripts & 30s actions</div>
-              </div>
-              <div className="p-2.5 rounded-[8px] bg-white/10 border border-white/10 text-center backdrop-blur-sm">
-                <div className="text-white font-extrabold text-xs sm:text-sm uppercase">4. Complain</div>
-                <div className="text-white/70 text-[10px] font-normal">SP, SPCA & Courts</div>
-              </div>
-            </div>
           </div>
-
-          {/* Right Column: Hero Visual Artwork */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm rounded-[10px] overflow-hidden shadow-2xl border-2 border-white/20 group">
-              <img
-                src={heroJusticeShieldImg}
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/images/hero_justice_shield_1786817120335.jpg';
-                }}
-                alt="Constitutional Legal Rights Shield India"
-                className="w-full h-48 sm:h-56 object-cover transform group-hover:scale-105 transition duration-500"
-                loading="eager"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-3.5 text-white">
-                <div className="flex items-center gap-1.5 text-amber-400 font-extrabold text-xs uppercase tracking-wide">
-                  <Shield className="w-3.5 h-3.5" />
-                  <span>Rule of Law & Constitution of India</span>
-                </div>
-                <p className="text-[11px] text-white/90 font-light mt-0.5">
-                  Art 20, 21, 22 Protection against illegal custody & arbitrary arrest
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      {/* Visual Featured Pillars Grid */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#25282b] flex items-center gap-1.5">
-            <BookOpen className="w-4 h-4 text-[#e60000]" />
-            <span>Key Citizen Protections (Click to View Specific Guidance)</span>
-          </span>
-          <span className="text-[11px] text-[#7e7e7e]">BNSS 2023 & Landmark Precedents</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Block 3: Quick Metric Grid / Key Action Cards (3 Block Cards) */}
+        <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
           
-          {/* Card 1: Traffic & Roadside Check */}
+          {/* Sub-block A: 30s SOS Quick Trigger */}
+          <div 
+            onClick={() => onOpenSOS()}
+            className="group cursor-pointer bg-gradient-to-br from-[#e60000] to-[#b30000] text-white rounded-[10px] p-4 shadow-sm hover:shadow-md transition active:scale-98 flex flex-col justify-between"
+          >
+            <div className="flex items-center justify-between">
+              <div className="p-2 rounded-[8px] bg-white/20">
+                <ShieldAlert className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-[10px] uppercase font-black tracking-wider px-2 py-0.5 rounded-full bg-white/20 text-white">
+                Emergency
+              </span>
+            </div>
+            <div className="mt-3">
+              <h3 className="text-sm font-extrabold uppercase tracking-tight flex items-center justify-between">
+                <span>30s Police SOS</span>
+                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition" />
+              </h3>
+              <p className="text-[11px] text-white/90 mt-1 font-light leading-snug">
+                Immediate protocol when stopped, questioned, or detained by police.
+              </p>
+            </div>
+          </div>
+
+          {/* Sub-block B: Traffic & DigiLocker Rights */}
           <div 
             onClick={() => {
               setActiveCategory('traffic');
@@ -234,42 +271,28 @@ export const SituationExplorer: React.FC<SituationExplorerProps> = ({
               const el = document.getElementById('situation-traffic-stop');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="group cursor-pointer bg-white rounded-[10px] border border-[#bebebe]/60 overflow-hidden shadow-sm hover:shadow-md hover:border-[#e60000] transition flex flex-col justify-between"
+            className="group cursor-pointer bg-white rounded-[10px] p-4 border border-[#bebebe]/70 shadow-sm hover:border-[#e60000] hover:shadow-md transition active:scale-98 flex flex-col justify-between"
           >
-            <div className="relative h-36 overflow-hidden">
-              <img
-                src={trafficRightsImg}
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/images/traffic_rights_card_1786817142250.jpg';
-                }}
-                alt="Traffic Police Stop Rights India"
-                className="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
-                loading="lazy"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-[#25282b]/80 backdrop-blur-sm text-white text-[10px] font-bold">
-                Traffic & Vehicles
+            <div className="flex items-center justify-between">
+              <div className="p-2 rounded-[8px] bg-amber-50 text-amber-700">
+                <Car className="w-5 h-5" />
               </div>
+              <span className="text-[10px] font-bold text-[#7e7e7e] uppercase">
+                Sec 130/139 MVA
+              </span>
             </div>
-
-            <div className="p-3.5 space-y-1.5 flex-1 flex flex-col justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#25282b] group-hover:text-[#e60000] transition flex items-center justify-between">
-                  <span>Traffic Stops & DigiLocker Rights</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#7e7e7e] group-hover:text-[#e60000] transform group-hover:translate-x-1 transition" />
-                </h3>
-                <p className="text-[11px] text-[#7e7e7e] leading-snug mt-1">
-                  DigiLocker is legally valid under IT Act Rule 9A. Police cannot snatch car keys or demand physical papers if verified digitally.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-[#f2f2f2] flex items-center justify-between text-[10px] text-[#7e7e7e] font-medium">
-                <span>Sec 130/139 Motor Vehicles Act</span>
-                <span className="text-[#e60000] font-bold">View Guide →</span>
-              </div>
+            <div className="mt-3">
+              <h3 className="text-xs font-bold text-[#25282b] group-hover:text-[#e60000] flex items-center justify-between transition">
+                <span>DigiLocker & Traffic</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#7e7e7e] group-hover:text-[#e60000] transform group-hover:translate-x-1 transition" />
+              </h3>
+              <p className="text-[11px] text-[#7e7e7e] mt-1 leading-snug">
+                Digital docs are legally valid. Officers cannot confiscate vehicle keys.
+              </p>
             </div>
           </div>
 
-          {/* Card 2: Women, Minors & Sunset Arrests */}
+          {/* Sub-block C: Women & Minors Protection */}
           <div 
             onClick={() => {
               setActiveCategory('women_juvenile');
@@ -277,42 +300,28 @@ export const SituationExplorer: React.FC<SituationExplorerProps> = ({
               const el = document.getElementById('situation-women-arrest-sunset');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="group cursor-pointer bg-white rounded-[10px] border border-[#bebebe]/60 overflow-hidden shadow-sm hover:shadow-md hover:border-[#e60000] transition flex flex-col justify-between"
+            className="group cursor-pointer bg-white rounded-[10px] p-4 border border-[#bebebe]/70 shadow-sm hover:border-[#e60000] hover:shadow-md transition active:scale-98 flex flex-col justify-between"
           >
-            <div className="relative h-36 overflow-hidden">
-              <img
-                src={womenRightsImg}
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/images/women_rights_card_1786817160019.jpg';
-                }}
-                alt="Women Rights and Police Guidelines"
-                className="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
-                loading="lazy"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-rose-900/80 backdrop-blur-sm text-white text-[10px] font-bold">
-                Women & Minors Protection
+            <div className="flex items-center justify-between">
+              <div className="p-2 rounded-[8px] bg-rose-50 text-rose-700">
+                <HeartHandshake className="w-5 h-5" />
               </div>
+              <span className="text-[10px] font-bold text-[#7e7e7e] uppercase">
+                Sec 43(5) BNSS
+              </span>
             </div>
-
-            <div className="p-3.5 space-y-1.5 flex-1 flex flex-col justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#25282b] group-hover:text-[#e60000] transition flex items-center justify-between">
-                  <span>Sunset to Sunrise Arrest Ban</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#7e7e7e] group-hover:text-[#e60000] transform group-hover:translate-x-1 transition" />
-                </h3>
-                <p className="text-[11px] text-[#7e7e7e] leading-snug mt-1">
-                  Women cannot be arrested between sunset and sunrise except in extreme cases with prior written Judicial Magistrate order. Female officer mandatory.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-[#f2f2f2] flex items-center justify-between text-[10px] text-[#7e7e7e] font-medium">
-                <span>Sec 43(5) BNSS & Sec 46(4) CrPC</span>
-                <span className="text-[#e60000] font-bold">View Guide →</span>
-              </div>
+            <div className="mt-3">
+              <h3 className="text-xs font-bold text-[#25282b] group-hover:text-[#e60000] flex items-center justify-between transition">
+                <span>Sunset Arrest Ban</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#7e7e7e] group-hover:text-[#e60000] transform group-hover:translate-x-1 transition" />
+              </h3>
+              <p className="text-[11px] text-[#7e7e7e] mt-1 leading-snug">
+                No female arrest between sunset & sunrise without prior judicial order.
+              </p>
             </div>
           </div>
 
-          {/* Card 3: FIR Refusal & Official Complaints */}
+          {/* Sub-block D: Mandatory FIR & Lalita Kumari */}
           <div 
             onClick={() => {
               setActiveCategory('fir');
@@ -320,46 +329,33 @@ export const SituationExplorer: React.FC<SituationExplorerProps> = ({
               const el = document.getElementById('situation-fir-refusal');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="group cursor-pointer bg-white rounded-[10px] border border-[#bebebe]/60 overflow-hidden shadow-sm hover:shadow-md hover:border-[#e60000] transition flex flex-col justify-between"
+            className="group cursor-pointer bg-white rounded-[10px] p-4 border border-[#bebebe]/70 shadow-sm hover:border-[#e60000] hover:shadow-md transition active:scale-98 flex flex-col justify-between"
           >
-            <div className="relative h-36 overflow-hidden">
-              <img
-                src={firComplaintImg}
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/images/fir_complaint_card_1786817175521.jpg';
-                }}
-                alt="Mandatory FIR Registration and Complaint Drafting"
-                className="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
-                loading="lazy"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-blue-900/80 backdrop-blur-sm text-white text-[10px] font-bold">
-                FIR & Legal Remedy
+            <div className="flex items-center justify-between">
+              <div className="p-2 rounded-[8px] bg-blue-50 text-blue-700">
+                <FileText className="w-5 h-5" />
               </div>
+              <span className="text-[10px] font-bold text-[#7e7e7e] uppercase">
+                Sec 173 BNSS
+              </span>
             </div>
-
-            <div className="p-3.5 space-y-1.5 flex-1 flex flex-col justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#25282b] group-hover:text-[#e60000] transition flex items-center justify-between">
-                  <span>FIR Refusal & Zero FIR Rights</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#7e7e7e] group-hover:text-[#e60000] transform group-hover:translate-x-1 transition" />
-                </h3>
-                <p className="text-[11px] text-[#7e7e7e] leading-snug mt-1">
-                  Mandatory FIR for all cognizable offences. Free FIR copy (Sec 173(2) BNSS). Up to 2-year imprisonment for refusing officers under Sec 198 BNS.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-[#f2f2f2] flex items-center justify-between text-[10px] text-[#7e7e7e] font-medium">
-                <span>Lalita Kumari SC Mandate</span>
-                <span className="text-[#e60000] font-bold">View Guide →</span>
-              </div>
+            <div className="mt-3">
+              <h3 className="text-xs font-bold text-[#25282b] group-hover:text-[#e60000] flex items-center justify-between transition">
+                <span>FIR Refusal Remedies</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#7e7e7e] group-hover:text-[#e60000] transform group-hover:translate-x-1 transition" />
+              </h3>
+              <p className="text-[11px] text-[#7e7e7e] mt-1 leading-snug">
+                Mandatory Zero FIR. Jail term for refusing officers under Sec 198 BNS.
+              </p>
             </div>
           </div>
 
         </div>
+
       </div>
 
       {/* Search & Category Filter Controls */}
-      <div className="space-y-3">
+      <div id="search-and-filter-bar" className="space-y-3 pt-2">
         <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
           
           {/* Search Input */}

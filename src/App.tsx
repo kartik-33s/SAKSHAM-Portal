@@ -15,6 +15,7 @@ import { ComplaintDraftBuilder } from './components/ComplaintDraftBuilder';
 import { DKBasuChecklist } from './components/DKBasuChecklist';
 import { LawCrossReference } from './components/LawCrossReference';
 import { HelplineDirectory } from './components/HelplineDirectory';
+import { ParticleTextEffect } from './components/ui/particle-text-effect';
 import { ShieldCheck, Scale, PhoneCall, Heart, ExternalLink, Clock, Share2 } from 'lucide-react';
 
 export default function App() {
@@ -44,8 +45,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#ffffff] text-[#25282b] flex flex-col font-sans selection:bg-[#e60000] selection:text-white">
+    <div className="min-h-screen bg-[#ffffff] bg-grid-lines text-[#25282b] flex flex-col font-sans selection:bg-[#e60000] selection:text-white relative">
       
+      {/* Background Top Ambient Accent */}
+      <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-[#25282b]/[0.02] to-transparent pointer-events-none" />
+
       {/* Navigation */}
       <Navbar
         activeTab={activeTab}
@@ -60,7 +64,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 relative z-10">
         
         {activeTab === 'situations' && (
           <SituationExplorer
@@ -68,6 +72,7 @@ export default function App() {
             onDraftComplaintForSituation={handleDraftComplaintForSituation}
             selectedSituationId={selectedSituationFromSOS}
             onOpenEmergencyShare={handleOpenEmergencyShare}
+            onOpenSOS={() => setIsSOSOpen(true)}
           />
         )}
 
@@ -203,9 +208,21 @@ export default function App() {
               Emergency: <strong className="text-[#e60000]">112</strong> | ACB: <strong>1064</strong> | Legal Aid: <strong>15100</strong>
             </div>
           </div>
+
+          {/* Bottom Particle Interactive Legal Intelligence Canvas */}
+          <div className="pt-8 border-t border-white/10 flex flex-col items-center">
+            <div className="text-center mb-3">
+              <span className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#e60000] bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                Interactive Legal Shield Particles
+              </span>
+            </div>
+            <ParticleTextEffect 
+              words={["SAKSHAM", "POLICE RIGHTS", "KNOW YOUR LAW", "PROTECT FREEDOM", "ZERO FIR", "ARTICLE 21"]}
+              className="w-full max-w-2xl bg-black/60 border border-white/10"
+            />
+          </div>
         </div>
       </footer>
-
     </div>
   );
 }
