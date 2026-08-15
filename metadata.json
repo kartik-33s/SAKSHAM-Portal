@@ -1,0 +1,6 @@
+{
+  "name": "SAKSHAM Portal",
+  "description": "Instant 30-second legal rights guide, official procedures, scripts, and formal complaint builder for police encounters in India under BNSS, BNS & Constitution.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
